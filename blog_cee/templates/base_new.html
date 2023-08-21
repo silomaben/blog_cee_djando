@@ -1,0 +1,259 @@
+{% load static %}
+
+<!-- /* haina/hakuna ujanja  by munga wakadinali*/ -->
+<!-- 
+
+  loooook above
+ -->
+
+<!doctype html>
+<html lang="en">
+  <!-- {% static 'base/' %} -->
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+            Cee Bloged Again
+        {% endblock %}
+    </title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="{% static 'base/css/maicons.css' %}">
+
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap.css' %}">
+  
+    <link rel="stylesheet" href="{% static 'base/vendor/animate/animate.css' %}">
+  
+    <link rel="stylesheet" href="{% static 'base/css/theme.css' %}">
+
+    <style>
+      
+    </style>
+    <style>
+      /* Styles for the dropdown menu */
+      .navbar-nav li.nav-item {
+        position: relative;
+      }
+    
+      .navbar-nav .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        z-index: 999;
+        padding: 0;
+        margin: 0;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-top: none;
+        min-width: 160px;
+        list-style: none;
+      }
+    
+      .navbar-nav .nav-item:hover .dropdown-menu {
+        display: block;
+      }
+    
+      .navbar-nav .dropdown-menu li {
+        padding: 10px;
+        text-align: left;
+      }
+    
+      .navbar-nav .dropdown-menu li:hover {
+        background-color: #e3e3e3;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky" data-offset="500">
+        <div class="container">
+
+          <a class="navbar-brand" href="{% url 'home' %}">Cee Bloged Again</a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="navbar-collapse collapse" id="navbarContent">
+            <ul class="navbar-nav ml-auto">
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+              </li>
+             
+
+              {% if cat_menu %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{% url 'blog' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Blog
+                </a>
+                <ul class="dropdown-menu">
+                  {% for item in cat_menu|slice:":4" %}
+                    <li><a class="dropdown-item" href="{% url 'category' item|slugify %}">{{ item }}</a></li>
+                  {% endfor %}
+                  <li><a class="dropdown-item" href="{% url 'category_list' %}">All categories</a></li>
+
+                </ul>
+              </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'category_list' %}">Blog category</a>
+                </li>
+
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact_us' %}">Contact</a>
+              </li>
+              {% if user.is_authenticated %}
+                <!-- {% if user.is_authenticated %} -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{user.first_name}} {{user.last_name}}
+                    </a>
+                    <ul class="dropdown-menu">
+                      {% if user.is_superuser%}
+                        <li><a class="dropdown-item" href="{% url 'add_post' %}">Add Post</a></li>
+                        <li><a class="dropdown-item" href="{% url 'add_category' %}">Add Category</a></li>
+                      {% endif %}
+                      <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Settings</a></li>
+                      {% if user.profile.id %}
+                        <li><a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %}">Edit Profile Page</a></li>
+                        <li><a class="dropdown-item" href="{% url 'show_profile_page' user.profile.id %}">Show Profile Page</a></li>
+                      {% else %}
+                        <li><a class="dropdown-item" href="{% url 'create_profile_page' %}">Create Profile Page</a></li>
+                      {% endif %}
+                      <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                  </li>
+                <!-- {% endif%} -->
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+              </li>
+              {% endif %}
+              
+
+              
+
+              
+             
+             
+             
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+    
+    <br/>
+    
+    <div class="container ">
+
+    {% block content %}
+
+    {% endblock %}
+
+    <br><br><br>
+
+    <footer class="page-footer bg-image" >
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-3 py-3">
+            <h3>Cee Blogged</h3>
+            <p>Find us and share your insights in the following platforms
+            <div class="social-media-button">
+              <a href="#"><span class="mai-logo-facebook-f"></span></a>
+              <a href="#"><span class="mai-logo-twitter"></span></a>
+              <a href="#"><span class="mai-logo-google-plus-g"></span></a>
+              <a href="#"><span class="mai-logo-instagram"></span></a>
+              <a href="#"><span class="mai-logo-youtube"></span></a>
+            </div>
+          </div>
+          <div class="col-lg-3 py-3">
+            <h5>Quick Links</h5>
+            <ul class="footer-menu">
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'about' %}">About Us</a></li>
+              <li><a href="{% url 'blog' %}">Blog</a></li>
+              <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+              <li><a href="{% url 'register' %}">Join Us</a></li>
+              <li><a href="{% url 'login' %}">Login</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 py-3">
+            <h5>Contact Us</h5>
+            <p>Nairobi, Kenya</p>
+            <a href="#" class="footer-link">+2547 28340000</a>
+            <a href="#" class="footer-link">info@ceeblogged.com</a>
+          </div>
+          <div class="col-lg-3 py-3">
+            <h5>Newsletter</h5>
+            <p>Get updates, articles or events on your mail.</p>
+            <form action="#">
+              <input type="text" class="form-control" placeholder="Enter your email..">
+              <button type="submit" class="btn btn-success btn-block mt-2">Subscribe</button>
+            </form>
+          </div>
+        </div>
+  
+        <p class="text-center" id="copyright">Cee Blogged &copy; 2020. </p>
+      </div>
+
+
+    </footer>
+    </div>
+    <script src="{% static 'base/js/jquery-3.5.1.min.js' %}"></script>
+
+    <script src="{% static 'base/js/bootstrap.bundle.min.js' %}"></script>
+
+    <script src="{% static 'base/js/google-maps.js' %}"></script>
+
+    <script src="{% static 'base/vendor/wow/wow.min.js' %}"></script>
+
+    <script src="{% static 'base/js/theme.js' %}"></script>
+    <script>
+      // 
+      // 
+      // 
+      // change this to match all url that contains the string category
+      // 
+      // 
+      if (window.location.pathname.includes('/category/')) {
+
+        const currentpage = document.querySelector("#currentPage")
+
+        if (window.location.pathname === '/blog'){
+          currentpage.textContent = "Blog";
+        }else{
+          console.log((window.location.pathname).split('/')[2])
+          currentpage.textContent = (window.location.pathname).split('/')[2]
+        }
+        
+      }
+    </script>
+    <script>
+      if (window.location.pathname.includes('/article/')) {
+      // Inject the logged-in user's name into the hidden field
+      var userName = '{{user.first_name}} {{user.last_name}}';  // Change to the appropriate variable
+      document.getElementById("comment_username").value = userName;
+  
+      // Add event listener to handle form submission
+      document.getElementById("comment-form").addEventListener("submit", function(event) {
+          // Prevent default form submission
+          event.preventDefault();
+          // Your additional JavaScript logic here (if needed)
+          // Finally, submit the form programmatically
+          event.target.submit();
+      });
+    }
+  </script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> -->
+  </body>
+</html>

@@ -1,0 +1,94 @@
+{% extends 'base_new.html' %}
+{% load static %}
+ 
+
+{% block content %}
+<div class="text-center wow fadeInUp">
+  <div class="subhead">Our Blog</div>
+  <h2 class="title-section" id="currentPage">Blog</h2>
+  <!-- <div class="divider mx-auto"></div> -->
+</div>
+
+  <div class="page-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10">
+          <form action="#" class="form-search-blog">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <select id="categories" class="custom-select bg-light">
+                  <option >All Categories</option>
+                  {% for item in cat_menu %}
+                  <option value="{{item}}">{{item}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <input type="text" class="form-control" placeholder="Enter keyword..">
+            </div>
+          </form>
+        </div>
+        <div class="col-sm-2 text-sm-right">
+          <button class="btn btn-secondary">Filter <span class="mai-filter"></span></button>
+        </div>
+      </div>
+
+      <div class="row my-5">
+        {% for post in object_list %}
+        <div class="col-lg-4 py-3">
+          <div class="card-blog">
+            <div class="header">
+              <div class="post-thumb">
+                <a href="{% url 'article-detail' post.pk %}">
+                  {% if post.snippet_image %}
+                    <img src="{{post.snippet_image.url}}" alt=""> 
+                  
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+            <div class="body">
+              <h5 class="post-title"><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a>
+                {% if user.is_authenticated %}
+                {% if user.id ==  post.author.id %}
+                    <a href="{% url 'update_post' post.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="0.7em" viewBox="0 0 576 512"><path d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"/></svg></a>
+                    <a href="{% url 'delete_post' post.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="0.7em" viewBox="0 0 448 512"><path d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"/></svg></a>
+                {% endif %}
+                {% endif %}
+              </h5>
+              category: <a href="{% url 'category' post.category|slugify %}">{{post.category}}</a>
+              <div class="post-date">Posted on <a href="#">{{ post.post_date}}</div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+
+      <nav aria-label="Page Navigation">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}
+
+
+<script>
+  
+</script>
