@@ -1,143 +1,533 @@
-{% extends 'base_new.html' %}
 {% load static %}
- 
 
-{% block content %}  
-<div class="container">
-    <div class="page-banner home-banner">
-      <div class="row align-items-center flex-wrap-reverse h-100">
-        <div class="col-md-6 py-5 wow fadeInLeft">
-          <h1 class="mb-4">Your journey to better health starts here.</h1>
-          <p class="text-lg text-grey mb-5">"Empower your health journey with our transformative blog."</p>
-          <a href="#" class="btn btn-primary btn-split">Watch Video <div class="fab"><span class="mai-play"></span></div></a>
-        </div>
-        <div class="col-md-6 py-5 wow zoomIn">
-          <div class="img-fluid text-center">
-            <img src="{% static 'base/img/landing_page.png' %}" alt="">
-          </div>
-        </div>
-      </div>
-      <a href="#about" class="btn-scroll" data-role="smoothscroll"><span class="mai-arrow-down"></span></a>
-    </div>
-  </div>
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <!-- Meta Tags -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="keywords" content="Site keywords here">
+		<meta name="description" content="">
+		<meta name='copyright' content=''>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- Title -->
+        <title>Mediplus - Free Medical and Doctor Directory HTML Template.</title>
+		
+		<!-- Favicon -->
+        <link rel="icon" href="{% static 'base_new/img/favicon.png' %}">
+		
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{% static 'base_new/css/bootstrap.min.css' %}">
+		<!-- Nice Select CSS -->
+		<link rel="stylesheet" href="{% static 'base_new/css/nice-select.css' %}">
+		<!-- Font Awesome CSS -->
+        <link rel="stylesheet" href="{% static 'base_new/css/font-awesome.min.css' %}">
+		<!-- icofont CSS -->
+        <link rel="stylesheet" href="{% static 'base_new/css/icofont.css' %}">
+		<!-- Slicknav -->
+		<link rel="stylesheet" href="{% static 'base_new/css/slicknav.min.css' %}">
+		<!-- Owl Carousel CSS -->
+        <link rel="stylesheet" href="{% static 'base_new/css/owl-carousel.css' %}">
+		<!-- Datepicker CSS -->
+		<link rel="stylesheet" href="{% static 'base_new/css/datepicker.css' %}">
+		<!-- Animate CSS -->
+        <link rel="stylesheet" href="{% static 'base_new/css/animate.min.css' %}">
+		<!-- Magnific Popup CSS -->
+        <link rel="stylesheet" href="{% static 'base_new/css/magnific-popup.css' %}">
+		
+		<!-- Medipro CSS -->
+        <link rel="stylesheet" href="{% static 'base_new/css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'base_new/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'base_new/css/responsive.css' %}">
+		
+    </head>
+    <body>
+	
+		<!-- Preloader -->
+        <div class="preloader">
+            <div class="loader">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
 
-  <!-- Blog -->
-  <!-- <div class="page-section">
-    <div class="container">
-      <div class="text-center wow fadeInUp">
-        <div class="subhead">Our Blog</div>
-        <h2 class="title-section">Read Latest News</h2>
-        <div class="divider mx-auto"></div>
-      </div>
-
-      <div class="row mt-5">
-        <div class="col-lg-4 py-3 wow fadeInUp">
-          <div class="card-blog">
-            <div class="header">
-              <div class="post-thumb">
-                <img src="../assets/img/blog/blog-1.jpg" alt="">
-              </div>
-            </div>
-            <div class="body">
-              <h5 class="post-title"><a href="#">Source of Content Inspiration</a></h5>
-              <div class="post-date">Posted on <a href="#">27 Jan 2020</a></div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-4 py-3 wow fadeInUp">
-          <div class="card-blog">
-            <div class="header">
-              <div class="post-thumb">
-                <img src="../assets/img/blog/blog-2.jpg" alt="">
-              </div>
-            </div>
-            <div class="body">
-              <h5 class="post-title"><a href="#">Source of Content Inspiration</a></h5>
-              <div class="post-date">Posted on <a href="#">27 Jan 2020</a></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 py-3 wow fadeInUp">
-          <div class="card-blog">
-            <div class="header">
-              <div class="post-thumb">
-                <img src="../assets/img/blog/blog-3.jpg" alt="">
-              </div>
-            </div>
-            <div class="body">
-              <h5 class="post-title"><a href="#">Source of Content Inspiration</a></h5>
-              <div class="post-date">Posted on <a href="#">27 Jan 2020</a></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 mt-4 text-center wow fadeInUp">
-          <a href="blog.html" class="btn btn-primary">View More</a>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
-<!-- Blog -->
-<div class="page-section">
-  <div class="container">
-    <div class="text-center wow fadeInUp">
-      <div class="subhead">Our Blog</div>
-      <h2 class="title-section">Read Latest Articles</h2>
-      <div class="divider mx-auto"></div>
-    </div>
-    
-
-    <div class="row mt-5">
-      {% for post in object_list %}
-        {% if forloop.counter <= 3 %}
-          
-            <div class="col-lg-4 py-3 wow fadeInUp">
-              <div class="card-blog">
-                <div class="header">
-                  <div class="post-thumb">
-                    <a href="{% url 'article-detail' post.pk %}">
-                      <!-- <img src="{% static 'base/img/blog/blog-1.jpg' %}" alt=""> -->
-                      {% if post.snippet_image %}
-                        <img src="{{post.snippet_image.url}}" alt=""> 
-                      
-                      {% endif %}
-                    </a>
-                  </div>
+                <div class="indicator"> 
+                    <svg width="16px" height="12px">
+                        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    </svg>
                 </div>
-                <div class="body">
-                  <h5 class="post-title"><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a> 
-                  {% if user.is_authenticated %}
-                    {% if user.id ==  post.author.id %}
-                        <a href="{% url 'update_post' post.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="0.7em" viewBox="0 0 576 512"><path d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"/></svg></a>
-                        <a href="{% url 'delete_post' post.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="0.7em" viewBox="0 0 448 512"><path d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"/></svg></a>
-                    {% endif %}
-                  {% endif %}
-                </h5>
-                  category: <a href="{% url 'category' post.category|slugify %}">{{post.category}}</a>
-                  <div class="post-date">Posted on <a href="#">{{ post.post_date}}</a></div>
-                </div>
-              </div>
             </div>
-          
-        {% endif %}
-      {% endfor %}
-    </div>
-    
-      
+        </div>
+	
+	
+		<!-- Header Area -->
+		<header class="header" >
+			<!-- Topbar -->
+			<div class="topbar">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6 col-md-5 col-12">
+							<!-- Contact -->
+							<ul class="top-link">
+								<li><a href="#">About</a></li>
+								<li><a href="#">Contact</a></li>
+								<li><a href="#">FAQ</a></li>
+							</ul>
+							<!-- End Contact -->
+						</div>
+						<div class="col-lg-6 col-md-7 col-12">
+							<!-- Top Contact -->
+							<ul class="top-contact">
+								<li><i class="fa fa-phone"></i>+254 729340748</li>
+								<li><i class="fa fa-envelope"></i><a href="mailto:support@yourmail.com">masikondesarah@gmail.com</a></li>
+							</ul>
+							<!-- End Top Contact -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Topbar -->
+			<!-- Header Inner -->
+			<div class="header-inner">
+				<div class="container">
+					<div class="inner">
+						<div class="row">
+							<div class="col-lg-3 col-md-3 col-12">
+								<!-- Start Logo -->
+								<div class="logo">
+									<a href="index.html"><img src="{% static 'base_new/img/logo.png' %}" alt="#"></a>
+								</div>
+								<!-- End Logo -->
+								<!-- Mobile Nav -->
+								<div class="mobile-nav"></div>
+								<!-- End Mobile Nav -->
+							</div>
+							<div class="col-lg-7 col-md-9 col-12">
+								<!-- Main Menu -->
+								<div class="main-menu">
+									<nav class="navigation">
+										<ul class="nav menu">
+											<li class="active"><a href="#">Home <i class="icofont-rounded-down"></i></a></li>
+											<li><a href="{% url 'about' %}">About</a></li>
 
-      <div class="col-12 mt-4 text-center wow fadeInUp">
-        <a href="blog.html" class="btn btn-primary">View More</a>
-      </div>
-    </div>
-  </div>
-</div>
+											{% if cat_menu %}
+											<li><a href="{% url 'blog' %}">Blog<i class="icofont-rounded-down"></i></a>
+												<ul class="dropdown">
+													{% for item in cat_menu|slice:":4" %}
+														<li><a href="{% url 'category' item|slugify %}">{{ item }}</a></li>
+													{% endfor %}
+													<li><a href="{% url 'category_list' %}">All categories</a></li>
+												</ul>
+											</li>
+											{% else %}
+											<li><a href="{% url 'category_list' %}">Blog category</a></li>
+											{% endif %}
+											<li><a href="contact.html">Contact Us</a></li>
+											{% if user.is_authenticated %}
+											<li><a href="#">{{user.first_name}} {{user.last_name}}<i class="icofont-rounded-down"></i></a>
+												<ul class="dropdown">
+													{% if user.is_superuser%}
+														<li><a href="{% url 'add_post' %}">Add Post</a></li>
+														<li><a href="{% url 'add_category' %}">Add Category</a></li>
+													{% endif %}
+													<li><a href="{% url 'edit_profile' %}">Edit Settings</a></li>
+													{% if user.profile.id %}
+														<li><a href="{% url 'edit_profile_page' user.profile.id %}">Edit Profile Page</a></li>
+														<li><a href="{% url 'show_profile_page' user.profile.id %}">Show Profile Page</a></li>
+													{% else %}
+														<li><a href="{% url 'create_profile_page' %}">Create Profile Page</a></li>
+													{% endif %}
+												</ul>
+											</li>
+											{% endif %}
+										</ul>
+									</nav>
+								</div>
+								<!--/ End Main Menu -->
+							</div>
+							<div class="col-lg-2 col-12">
+								<div class="get-quote" style="display: flex; gap: 5px;">
+									{% if user.is_authenticated %}
+										<a href="{% url 'logout' %}" style="background-color: #fd7272;" class="btn">Logout</a>
+									{% else %}
+											<a href="{% url 'login' %}" class="btn">Login</a>
+											<a href="{% url 'register' %}" class="btn">Register</a>
+										{% endif %}
+									<!-- <a href="appointment.html" class="btn">Book Appointment</a> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/ End Header Inner -->
+		</header>
+		<!-- End Header Area -->
+		
+		<!-- Slider Area -->
+		<section class="slider">
+			<div class="hero-slider">
+				<!-- Start Single Slider -->
+				<div class="single-slider" style="background-image:url('../../static/base_new/img/slider2.jpg')">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-7">
+								<div class="text">
+									<h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam. </p>
+									<div class="button">
+										<a href="#" class="btn">Get Appointment</a>
+										<a href="#" class="btn primary">Learn More</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Single Slider -->
+				<!-- Start Single Slider -->
+				<div class="single-slider" style="background-image:url('../../static/base_new/img/slider.jpg')">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-7">
+								<div class="text">
+									<h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam. </p>
+									<div class="button">
+										<a href="#" class="btn">Get Appointment</a>
+										<a href="#" class="btn primary">About Us</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Start End Slider -->
+				<!-- Start Single Slider -->
+				<div class="single-slider" style="background-image:url('../../static/base_new/img/slider3.jpg')">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-7">
+								<div class="text">
+									<h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam. </p>
+									<div class="button">
+										<a href="#" class="btn">Get Appointment</a>
+										<a href="#" class="btn primary">Conatct Now</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Single Slider -->
+			</div>
+		</section>
+		<!--/ End Slider Area -->
+		
+<br><br>
+		<!-- Start Feautes -->
+		<section class="Feautes section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="section-title">
+							<h2>We Are Always Ready to Help You & Your Family</h2>
+							<img src="{% static 'base_new/img/section-img.png' %}" alt="#">
+							<p>Your well-being is our priority. Feel free to reach out to us for all your healthcare needs.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 col-12">
+						<!-- Start Single features -->
+						<div class="single-features">
+							<div class="signle-icon">
+								<i class="icofont icofont-ambulance-cross"></i>
+							</div>
+							<h3>Virtual Consultations</h3>
+							<p>Get personalized remote healthcare consultations with our pharmacists, accessible from anywhere.</p>
+						</div>
+						<!-- End Single features -->
+					</div>
+					<div class="col-lg-4 col-12">
+						<!-- Start Single features -->
+						<div class="single-features">
+							<div class="signle-icon">
+								<i class="icofont icofont-medical-sign-alt"></i>
+							</div>
+							<h3>Medication Management</h3>
+							<p>Efficient and expert care in optimizing your medication regimen for better health.</p>
+						</div>
+						<!-- End Single features -->
+					</div>
+					<div class="col-lg-4 col-12">
+						<!-- Start Single features -->
+						<div class="single-features last">
+							<div class="signle-icon">
+								<i class="icofont icofont-stethoscope"></i>
+							</div>
+							<h3>Health Education</h3>
+							<p>Empowering you with valuable health insights and tips through informative content.</p>
+						</div>
+						<!-- End Single features -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ End Feautes -->
+		
+		
+		
+		<!-- Start Why choose -->
+		<section class="why-choose section" >
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="section-title">
+							<h2>We Offer Different Services To Improve Your Health</h2>
+							<img src="{% static 'base_new/img/section-img.png' %}" alt="#">
+							<p>Lorem ipsum dolor sit amet consectetur adipiscing elit praesent aliquet. pretiumts</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 col-12">
+						<!-- Start Choose Left -->
+						<div class="choose-left">
+							<h3>Who We Are</h3>
+							<p>Welcome to PharmaSage Solutions, where health meets self-growth. Dr. Sarah Naserian, the author, explores the profound connection between well-being and personal development. Our mission is to inspire and empower you to break barriers and unlock your potential.</p>
+							<p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
+							<div class="row">
+								<div class="col-lg-6">
+									<ul class="list">
+										<li><i class="fa fa-caret-right"></i>Shared experiences.</li>
+										<li><i class="fa fa-caret-right"></i>Health tips</li>
+										<li><i class="fa fa-caret-right"></i>Self growth</li>
+									</ul>
+								</div>
+								<div class="col-lg-6">
+									<ul class="list">
+										<li><i class="fa fa-caret-right"></i>Expert Insights</li>
+										<li><i class="fa fa-caret-right"></i>Community Support</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- End Choose Left -->
+					</div>
+					<div class="col-lg-6 col-12">
+						<!-- Start Choose Rights -->
+						<div class="choose-right">
+							<div class="video-image">
+								<!-- Video Animation -->
+								<div class="promo-video">
+									<div class="waves-block">
+										<div class="waves wave-1"></div>
+										<div class="waves wave-2"></div>
+										<div class="waves wave-3"></div>
+									</div>
+								</div>
+								<!--/ End Video Animation -->
+								<a href="https://www.youtube.com/watch?v=RFVXy6CRVR4" class="video video-popup mfp-iframe"><i class="fa fa-play"></i></a>
+							</div>
+						</div>
+						<!-- End Choose Rights -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ End Why choose -->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- Start Blog Area -->
+		<section class="blog section" id="blog">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="section-title">
+							<h2>Keep up with Our Most Recent Blogs.</h2>
+							<img src="{% static 'base_new/img/section-img.png' %}" alt="#">
+							<p>We explore topics at the intersection of health and business on our blog.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					{% for post in object_list %}
+        				{% if forloop.counter <= 3 %}
+					<div class="col-lg-4 col-md-6 col-12">
+						<!-- Single Blog -->
+						<div class="single-news">
+							<div class="news-head">
+								{% if post.snippet_image %}
+									<img src="{{post.snippet_image.url}}" alt=""> 
+								{% endif %}
+							</div>
+							<div class="news-body">
+								<div class="news-content">
+									<div class="date">{{ post.post_date}}</div>
+									<h2><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a></h2>
+									<p class="text">{{ post.snippet }}</p>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Blog -->
+					</div>
+						{% endif %}
+      				{% endfor %}
+				</div>
+			</div>
+		</section>
+		<!-- End Blog Area -->
+		
 
-
-
-{% endblock %}
-
+		<!-- Start Newsletter Area -->
+		<section class="newsletter section">
+			<div class="container">
+				<div class="row ">
+					<div class="col-lg-6  col-12">
+						<!-- Start Newsletter Form -->
+						<div class="subscribe-text ">
+							<h6>Sign up for newsletter</h6>
+							<p class="">Stay in the know! Join our newsletter for the latest health insights, wellness tips, and exclusive offers delivered right to your inbox.</p>
+						</div>
+						<!-- End Newsletter Form -->
+					</div>
+					<div class="col-lg-6  col-12">
+						<!-- Start Newsletter Form -->
+						<div class="subscribe-form ">
+							<form method="get" target="_blank" class="newsletter-inner">
+								<input name="EMAIL" placeholder="Your email address" class="common-input" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Your email address'" required="" type="email">
+								<button class="btn">Subscribe</button>
+							</form>
+						</div>
+						<!-- End Newsletter Form -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /End Newsletter Area -->
+		
+		<!-- Footer Area -->
+		<footer id="footer" class="footer ">
+			<!-- Footer Top -->
+			<div class="footer-top">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-md-6 col-12">
+							<div class="single-footer">
+								<h2>About Us</h2>
+								<p>We're Pharmasage Solutions, exploring the connection between health and personal growth</p>
+								<!-- Social -->
+								<ul class="social">
+									<li><a href="#"><i class="icofont-facebook"></i></a></li>
+									<li><a href="#"><i class="icofont-google-plus"></i></a></li>
+									<li><a href="#"><i class="icofont-twitter"></i></a></li>
+									<li><a href="#"><i class="icofont-vimeo"></i></a></li>
+									<li><a href="#"><i class="icofont-pinterest"></i></a></li>
+								</ul>
+								<!-- End Social -->
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-12">
+							<div class="single-footer f-link">
+								<h2>Quick Links</h2>
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-12">
+										<ul>
+											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a></li>
+											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>About Us</a></li>
+											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Blog</a></li>
+											<li><a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Contact Us</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-lg-3 col-md-6 col-12">
+							<div class="single-footer">
+								<h2>Newsletter</h2>
+								<p>Get the latest health and wellness updates directly to your inbox. Subscribe now!</p>
+								<form  method="get" target="_blank" class="newsletter-inner">
+									<input name="email" placeholder="Email Address" class="common-input" onfocus="this.placeholder = ''"
+										onblur="this.placeholder = 'Your email address'" required="" type="email">
+									<button class="button"><i class="icofont icofont-paper-plane"></i></button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/ End Footer Top -->
+			<!-- Copyright -->
+			<div class="copyright">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-12">
+							<div class="copyright-content">
+								<p>© Pharmasage Solutions |  All Rights Reserved </p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/ End Copyright -->
+		</footer>
+		<!--/ End Footer Area -->
+		
+		<!-- jquery Min JS -->
+        <script src="{% static 'base_new/js/jquery.min.js' %}"></script>
+		<!-- jquery Migrate JS -->
+		<script src="{% static 'base_new/js/jquery-migrate-3.0.0.js' %}"></script>
+		<!-- jquery Ui JS -->
+		<script src="{% static 'base_new/js/jquery-ui.min.js' %}"></script>
+		<!-- Easing JS -->
+        <script src="{% static 'base_new/js/easing.js' %}"></script>
+		<!-- Color JS -->
+		<script src="{% static 'base_new/js/colors.js' %}"></script>
+		<!-- Popper JS -->
+		<script src="{% static 'base_new/js/popper.min.js' %}"></script>
+		<!-- Bootstrap Datepicker JS -->
+		<script src="{% static 'base_new/js/bootstrap-datepicker.js' %}"></script>
+		<!-- Jquery Nav JS -->
+        <script src="{% static 'base_new/js/jquery.nav.js' %}"></script>
+		<!-- Slicknav JS -->
+		<script src="{% static 'base_new/js/slicknav.min.js' %}"></script>
+		<!-- ScrollUp JS -->
+        <script src="{% static 'base_new/js/jquery.scrollUp.min.js' %}"></script>
+		<!-- Niceselect JS -->
+		<script src="{% static 'base_new/js/niceselect.js' %}"></script>
+		<!-- Tilt Jquery JS -->
+		<script src="{% static 'base_new/js/tilt.jquery.min.js' %}"></script>
+		<!-- Owl Carousel JS -->
+        <script src="{% static 'base_new/js/owl-carousel.js' %}"></script>
+		<!-- counterup JS -->
+		<script src="{% static 'base_new/js/jquery.counterup.min.js' %}"></script>
+		<!-- Steller JS -->
+		<script src="{% static 'base_new/js/steller.js' %}"></script>
+		<!-- Wow JS -->
+		<script src="{% static 'base_new/js/wow.min.js' %}"></script>
+		<!-- Magnific Popup JS -->
+		<script src="{% static 'base_new/js/jquery.magnific-popup.min.js' %}"></script>
+		<!-- Counter Up CDN JS -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="{% static 'base_new/js/bootstrap.min.js' %}"></script>
+		<!-- Main JS -->
+		<script src="{% static 'base_new/js/main.js' %}"></script>
+    </body>
+</html>
