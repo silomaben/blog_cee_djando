@@ -89,7 +89,7 @@
         items: 3,
         loop: !1,
         center: !1,
-        mouseDrag: !0,
+        mouseDrag: null, // slider for blog portfolio stuff
         touchDrag: !0,
         pullDrag: !0,
         freeDrag: !1,

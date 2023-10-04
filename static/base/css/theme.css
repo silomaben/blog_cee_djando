@@ -2054,14 +2054,14 @@ a.text-dark:hover, a.text-dark:focus {
 
 /* Custom Plugin */
 .owl-nav {
-  display: block;
+  display: none;
   margin: 15px auto;
   text-align: center;
 }
 
 .owl-carousel .owl-nav button.owl-next,
 .owl-carousel .owl-nav button.owl-prev {
-  display: inline-block;
+  display: none;
   padding: 6px 0 !important;
   background-color: #00D9A5;
   color: #fff;

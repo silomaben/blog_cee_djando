@@ -1,317 +1,88 @@
 {% extends 'base_new.html' %}
 {% load static %}
-{% block title %}{{ post.title_tag }}{% endblock %}
  
-<h1>post</h1>
+
 {% block content %}
 
-<div class="row">
-  <div class="col-lg-8">
-    <div class="blog-single-wrap">
-      <div class="header">
-        <div class="post-thumb">
-          {% if post.header_image %}
-            <img src="{{post.header_image.url}}" alt=""> <br>
-          
-          {% endif %}
-        </div>
-        <div class="meta-header">
-          <div class="post-author">
-            <div class="avatar">
-              {% if post.author.profile.profile_pic.url %}
-                <img src="{{post.author.profile.profile_pic.url}}" class="card-img" alt="...">
-              {% else %}
-                <img src="{% static 'blog/images/default-user.jpg' %}" class="card-img" alt="...">
-              {% endif %}
-            </div>
-            by <a href="{% url 'show_profile_page' post.author.profile.id %}">{{ post.author.first_name}} {{ post.author.last_name}}</a>
-          </div>
 
-          <div class="post-sharer">
-            {% if post.author.profile.website_url  %}
-                <a  target="_blank" href="{{post.author.profile.website_url}}">Website</a>
-            {% endif %}
-            {% if post.author.profile.facebook_url  %}
-            <a href="{{post.author.profile.facebook_url}}" target="_blank" class="btn social-facebook"><span class="mai-logo-facebook-f"></span></a>
-            {% endif %}
-            {% if post.author.profile.instagram_url  %}
-                 | <a target="_blank" href="{{post.author.profile.instagram_url}}">instagram</a>
-            {% endif %}
-            {% if post.author.profile.linkedin_url  %}  
-            <a href="{{post.author.profile.linkedin_url}}" target="_blank" class="btn social-linkedin"><span class="mai-logo-linkedin"></span></a>
-            {% endif %}
-            {% if post.author.profile.twitter_url  %}
-            <a href="{{post.author.profile.twitter_url}}" target="_blank"><span class="mai-logo-twitter"></span></a>
-            {% endif %}
-            <a href="#" target="_blank" class="btn"><span class="mai-mail"></span></a>
-          </div>
-        </div>
-      </div>
-      <h1 class="post-title">{{ post.title }}</h1>
-      <div class="post-meta">
-        <div class="post-date">
-          <span class="icon">
-            <span class="mai-time-outline"></span>
-          </span> <a href="#">{{ post.post_date}}</a>
-        </div>
-        
-      </div>
-      <div class="post-content">
-        {{post.body|safe}}
-      </div>
-    </div>
-
-    <div>
-      
-    <hr>
-    <form action="{% url 'like_post' post.pk %}" method="POST">
-        {% csrf_token %}
-        {% if user.is_authenticated %}
-            {% if liked %}
-            <button type="submit", name="post_id", value="{{ post.id }}" , class="btn btn-danger btn-sm">
-                Unlike
-            </button> - {{ total_likes }} likes
-            {% else %}
-            <button type="submit", name="post_id", value="{{ post.id }}" , class="btn btn-primary btn-sm">
-                Like
-            </button> - {{ total_likes }} likes
-            {% endif %}
-        {% else %}
-        <a href="{% url 'login' %}">Login</a> to like.
-        {% endif %}
-    </form>
-    <hr>
-    </div>
-
-    <div>
-      <h2>Comments...</h2>
-      {% if user.is_authenticated %}
-          {% if not post.comments.all %}
-              <h6>No Comments Yet ...</h6> 
-              <div class="form-group-comments" style="display: flex; flex-direction: row;  margin-bottom: 1rem;">
-                <div class="col-md-2">
-                  {% if page_user.profile_pic %}
-                      <img class="comment-profile-pic" src="{{page_user.profile_pic.url}}" class="card-img" alt="...">
-                  {% else %}
-                  <img class="comment-profile-pic" src="{% static 'blog/images/default-user.jpg' %}" class="card-img" alt="...">
-          
-                  {% endif %}
-                </div>
-                
-                  <form method="POST" action="{% url 'add_comment' post.pk %}">
-                    <div style="display: flex; flex-direction: column; width: 500px; gap: 20px; ">
-                      <div class="commentForm" style=" margin-top: 8px;">
-                      {% csrf_token %}
-                      {{ comment_form.name }}
-                      {{ comment_form.body }}
-                      </div>
-                    <button class="btn btn-secondary" style="align-self: flex-end; ">Add Comment</button>
-                  </div>
-                 
-                </form>
-            </div>
-          {% else %}
-            <!-- <a href="{% url 'add_comment' post.pk %}">add comment</a><br><br> -->
-            <div class="form-group-comments" style="display: flex; flex-direction: row;  margin-bottom: 1rem;">
-              <div class="col-md-2">
-                {% if page_user.profile_pic %}
-                    <img class="comment-profile-pic" src="{{page_user.profile_pic.url}}" class="card-img" alt="...">
-                {% else %}
-                <img class="comment-profile-pic" src="{% static 'blog/images/default-user.jpg' %}" class="card-img" alt="...">
-        
-                {% endif %}
-              </div>
-              
-                <form method="POST" action="{% url 'add_comment' post.pk %}">
-                  <div style="display: flex; flex-direction: column; width: 500px; gap: 20px; ">
-                    <div class="commentForm" style=" margin-top: 8px;">
-                    {% csrf_token %}
-                    {{ comment_form.name }}
-                    {{ comment_form.body }}
+<!-- Start Portfolio Details Area -->
+<section class="pf-details section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="inner-content">
+                    <div class="image-slider">
+                        <div class="pf-details-slider">
+                            {% if post.header_image %}
+                            <img src="{{post.header_image.url}}" alt="#">
+                            <img src="{{post.header_image.url}}" alt="#">
+                            {% endif %}
+                        </div>
                     </div>
-                  <button class="btn btn-secondary" style="align-self: flex-end; ">Add Comment</button>
+
+                    <section class="news-single section">
+                        <div class="meta">
+                            <div class="meta-left">
+                                {% if post.author.profile.profile_pic.url %}
+                                <span class="author"><a href="{% url 'show_profile_page' post.author.profile.id %}"><img src="{{post.author.profile.profile_pic.url}}" alt="#">{{ post.author.first_name}} {{ post.author.last_name}}</a></span>
+                                {% else %}
+                                <span class="author"><a href="{% static 'blog/images/default-user.jpg' %}"><img src="{{post.author.profile.profile_pic.url}}" alt="#">{{ post.author.first_name}} {{ post.author.last_name}}</a></span>
+                                {% endif %}
+                            </div>
+                            <div class="meta-right">
+                                <span class="date-blog"><i class="fa fa-clock-o"></i>{{ post.post_date}}</span>
+                                <span class="comments"><a href="#"><i class="fa fa-comments"></i>05 Comments</a></span>
+                                <span class="views"><i class="fa fa-eye"></i>33K Views</span>
+                                {% if user.is_authenticated %}
+                                {% if user.id ==  post.author.id %}
+                                    <a href="{% url 'update_post' post.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="0.7em" viewBox="0 0 576 512"><path d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"/></svg></a>
+                                    <a href="{% url 'delete_post' post.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="0.7em" viewBox="0 0 448 512"><path d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"/></svg></a>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <div class="body-text" style="margin-top: -100px;">
+                        <h3>{{ post.title }}</h3>
+                        <div class="post-content">
+                            {{post.body|safe}}
+                        </div>
+                        <div>      
+                            <hr>
+                            <form action="{% url 'like_post' post.pk %}" method="POST">
+                                {% csrf_token %}
+                                {% if user.is_authenticated %}
+                                    {% if liked %}
+                                    <button type="submit", name="post_id", value="{{ post.id }}" , class="btn btn-danger btn-sm">
+                                        Unlike
+                                    </button> 
+                                    <!-- -// {{ total_likes }} likes -->
+                                    {% else %}
+                                    <button type="submit", name="post_id", value="{{ post.id }}" , class="btn btn-primary btn-sm">
+                                        Like
+                                    </button> 
+                                    <!-- - {{ total_likes }} likes -->
+                                    {% endif %}
+                                {% else %}
+                                <a href="{% url 'login' %}">Login</a> to like.
+                                {% endif %}
+                            </form>
+                            <hr>
+                            </div>
+                        <div class="share">
+                            <h4>Share Now -</h4>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-               
-              </form>
-              
-              
-          </div>
-              {% for comment in post.comments.all %}
-                <strong> {{comment.name}} </strong>- <span style="font-size: smaller;">{{comment.date}}</span>
-                <br>
-                {{comment.body}}
-                <br><br>
-              {% endfor %}
-          {% endif %}
-
-
-
-        
-      {% else %}
-        {% if not post.comments.all %}
-            <h6>No Comments Yet ... </h6>
-        {% else %}
-            {% for comment in post.comments.all %}
-              <strong> {{comment.name}} - {{comment.date_added}}</strong>
-              <br>
-              {{comment.body}}
-              <br><br>
-            {% endfor %}
-        {% endif %}
-
-        
-            
-      {% endif %}
-    <!-- {% if not post.comments.all %}
-     <h6>No Comments Yet ... <a href="{% url 'add_comment' post.pk %}">add a one</a></h6> 
-    {% else %}
-    <a href="{% url 'add_comment' post.pk %}">add comment</a><br><br>
-      {% for comment in post.comments.all %}
-       <strong> {{comment.name}} - {{comment.date_added}}</strong>
-       <br>
-       {{comment.body}}
-       <br><br>
-      {% endfor %}
-    {% endif %} -->
-    <hr>
-  </div>
-
-    
-
-    <!-- <div class="comment-form-wrap pt-5">
-      <h2 class="mb-5">Leave a comment</h2>
-      <form action="#" class="">
-        <div class="form-row form-group">
-          <div class="col-md-6">
-            <label for="name">Name *</label>
-            <input type="text" class="form-control" id="name">
-          </div>
-          <div class="col-md-6">
-            <label for="email">Email *</label>
-            <input type="email" class="form-control" id="email">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="website">Website</label>
-          <input type="url" class="form-control" id="website">
-        </div>
-
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea name="msg" id="message" cols="30" rows="8" class="form-control"></textarea>
-        </div>
-        <div class="form-group">
-          <input type="submit" value="Post Comment" class="btn btn-primary">
-        </div>
-
-      </form>
-    </div> -->
-
-  </div>
-
-  <br>
-
-
-  
-  <div class="col-lg-4">
-    <div class="widget">
-      <!-- Widget search -->
-      <!-- <div class="widget-box">
-        <form action="#" class="search-widget">
-          <input type="text" class="form-control" placeholder="Enter keyword..">
-          <button type="submit" class="btn btn-primary btn-block">Search</button>
-        </form>
-      </div> -->
-
-      <!-- Widget Categories -->
-      <div class="widget-box">
-        <h4 class="widget-title">Categories</h4>
-        <div class="divider"></div>
-
-        <ul class="categories">
-          {% for item in cat_menu %}
-            <li><a href="{% url 'category' item|slugify %}">{{item}}</a></li>
-                    <!-- <p><a class="dropdown-item" href="{% url 'category' item|slugify %}">{{item}}</a></p> -->
-          {% endfor %}
-          <!-- <li><a href="#">LifeStyle</a></li>
-          <li><a href="#">Food</a></li>
-          <li><a href="#">Healthy</a></li>
-          <li><a href="#">Sports</a></li>
-          <li><a href="#">Entertainment</a></li> -->
-        </ul>
-      </div>
-
-      <!-- Widget recent post -->
-      <!-- <div class="widget-box">
-        <h4 class="widget-title">Recent Post</h4>
-        <div class="divider"></div>
-
-        <div class="blog-item">
-            <a class="post-thumb" href="">
-              <img src="../assets/img/blog/blog-1.jpg" alt="">
-            </a>
-            <div class="content">
-              <h6 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h6>
-              <div class="meta">
-                <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
-                <a href="#"><span class="mai-person"></span> Admin</a>
-                <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-              </div>
             </div>
         </div>
-
-        <div class="blog-item">
-            <a class="post-thumb" href="">
-              <img src="../assets/img/blog/blog-2.jpg" alt="">
-            </a>
-            <div class="content">
-              <h6 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h6>
-              <div class="meta">
-                <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
-                <a href="#"><span class="mai-person"></span> Admin</a>
-                <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-              </div>
-            </div>
-        </div>
-
-        <div class="blog-item">
-            <a class="post-thumb" href="">
-              <img src="../assets/img/blog/blog-3.jpg" alt="">
-            </a>
-            <div class="content">
-              <h6 class="post-title"><a href="#">Even the all-powerful Pointing has no control</a></h6>
-              <div class="meta">
-                <a href="#"><span class="mai-calendar"></span> July 12, 2018</a>
-                <a href="#"><span class="mai-person"></span> Admin</a>
-                <a href="#"><span class="mai-chatbubbles"></span> 19</a>
-              </div>
-            </div>
-        </div>
-
-      </div> -->
-
-      <!-- Widget Tag Cloud -->
-      <div class="widget-box">
-        <h4 class="widget-title">Tag Cloud</h4>
-        <div class="divider"></div>
-
-        <div class="tag-clouds">
-          <a href="#" class="tag-cloud-link">Projects</a>
-          <a href="#" class="tag-cloud-link">Design</a>
-          <a href="#" class="tag-cloud-link">Travel</a>
-          <a href="#" class="tag-cloud-link">Brand</a>
-          <a href="#" class="tag-cloud-link">Trending</a>
-          <a href="#" class="tag-cloud-link">Knowledge</a>
-          <a href="#" class="tag-cloud-link">Food</a>
-        </div>
-      </div>
-
     </div>
-  </div>
-</div>
-</div>
-</div>
-
-   
-
+</section>
+<!-- End Portfolio Details Area -->
 {% endblock %}
