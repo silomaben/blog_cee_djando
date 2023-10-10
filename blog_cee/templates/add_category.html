@@ -5,28 +5,33 @@
 
 {% if user.is_authenticated %}
 
-    
-    <div class="text-center wow fadeInUp">
-        <div class="subhead">Our Blog</div>
-        <h2 class="title-section">Add Category</h2>
-        <div class="divider mx-auto"></div>
-        <br>
-    </div>
+<div class="page-section">
+    <div class="container">
 
-    <div  class="form-group">
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-secondary">Add Category</button>
-    </form>
+            <div class="text-center wow fadeInUp">
+                <div class="subhead">Our Blog</div>
+                <h2 class="title-section">Add Category</h2>
+                <div class="divider mx-auto"></div>
+                <br>
+            </div>
+
+            <div  class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary">Add Category</button>
+            </form>
+            </div>
+            <br>
+            <br>
+        {% else %}
+            <h3>You are not allowed here...and you know it</h3>
+        {% endif %}
+            </div>
+            </div>
+
     </div>
-    <br>
-    <br>
-{% else %}
-    <h3>You are not allowed here...and you know it</h3>
-{% endif %}
-    </div>
-    </div>
+</div>
      
 {% endblock %}
 

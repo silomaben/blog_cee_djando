@@ -2,24 +2,27 @@
 
 {% block title %}Edit Settings{% endblock %}
 {% block content %}
+<div class="page-section">
+    <div class="container">
+        <!-- <h1>Edit profile</h1> -->
+        <div class="text-center wow fadeInUp">
+            <div class="subhead">Settings</div>
+            <h2 class="title-section">Edit profile</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+            <br><br>
+            <br><br>
 
-<!-- <h1>Edit profile</h1> -->
-<div class="text-center wow fadeInUp">
-    <div class="subhead">Settings</div>
-    <h2 class="title-section">Edit profile</h2>
-    <div class="divider mx-auto"></div>
+            <div class="form-group">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-secondary">Update Profile</button>
+                </form>
+            </div>
+            </div>
+            </div>
+    </div>
 </div>
-    <br><br>
-    <br><br>
-
-    <div class="form-group">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-secondary">Update Profile</button>
-        </form>
-    </div>
-    </div>
-    </div>
 
 {% endblock %}
