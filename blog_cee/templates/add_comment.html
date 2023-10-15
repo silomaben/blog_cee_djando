@@ -1,0 +1,27 @@
+{% extends 'base_new.html' %}
+ 
+{% block title %}Comment on Blog Post{% endblock %}
+{% block content %}
+
+    <h1>add blog post</h1>
+
+    <div  class="form-group">
+    <!-- <form method="POST" action="{% url 'article_detail' post.pk %}"> -->
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-secondary">Add Comment</button>
+    </form>
+    </div>
+
+    <script>
+        var name = '{{ user.id }}';
+        document.getElementById("elder").value = name;
+    </script>
+
+</div>
+</div>
+
+     
+{% endblock %}
+

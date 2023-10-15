@@ -1,0 +1,88 @@
+{% extends 'base_new.html' %}
+{% load static %}
+ 
+
+{% block content %}
+
+
+<!-- Start Portfolio Details Area -->
+<section class="pf-details section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="inner-content">
+                    <div class="image-slider">
+                        <div class="pf-details-slider">
+                            {% if post.header_image %}
+                            <img src="{{post.header_image.url}}" alt="#">
+                            <img src="{{post.header_image.url}}" alt="#">
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <section class="news-single section">
+                        <div class="meta">
+                            <div class="meta-left">
+                                {% if post.author.profile.profile_pic.url %}
+                                <span class="author"><a href="{% url 'show_profile_page' post.author.profile.id %}"><img src="{{post.author.profile.profile_pic.url}}" alt="#">{{ post.author.first_name}} {{ post.author.last_name}}</a></span>
+                                {% else %}
+                                <span class="author"><a href="{% static 'blog/images/default-user.jpg' %}"><img src="{{post.author.profile.profile_pic.url}}" alt="#">{{ post.author.first_name}} {{ post.author.last_name}}</a></span>
+                                {% endif %}
+                            </div>
+                            <div class="meta-right">
+                                <span class="date-blog"><i class="fa fa-clock-o"></i>{{ post.post_date}}</span>
+                                <span class="comments"><a href="#"><i class="fa fa-comments"></i>05 Comments</a></span>
+                                <span class="views"><i class="fa fa-eye"></i>33K Views</span>
+                                {% if user.is_authenticated %}
+                                {% if user.id ==  post.author.id %}
+                                    <a href="{% url 'update_post' post.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="0.7em" viewBox="0 0 576 512"><path d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"/></svg></a>
+                                    <a href="{% url 'delete_post' post.pk %}"><svg xmlns="http://www.w3.org/2000/svg" height="0.7em" viewBox="0 0 448 512"><path d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"/></svg></a>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <div class="body-text" style="margin-top: -100px;">
+                        <h3>{{ post.title }}</h3>
+                        <div class="post-content">
+                            {{post.body|safe}}
+                        </div>
+                        <div>      
+                            <hr>
+                            <form action="{% url 'like_post' post.pk %}" method="POST">
+                                {% csrf_token %}
+                                {% if user.is_authenticated %}
+                                    {% if liked %}
+                                    <button type="submit", name="post_id", value="{{ post.id }}" , class="btn btn-danger btn-sm">
+                                        Unlike
+                                    </button> 
+                                    <!-- -// {{ total_likes }} likes -->
+                                    {% else %}
+                                    <button type="submit", name="post_id", value="{{ post.id }}" , class="btn btn-primary btn-sm">
+                                        Like
+                                    </button> 
+                                    <!-- - {{ total_likes }} likes -->
+                                    {% endif %}
+                                {% else %}
+                                <a href="{% url 'login' %}">Login</a> to like.
+                                {% endif %}
+                            </form>
+                            <hr>
+                            </div>
+                        <div class="share">
+                            <h4>Share Now -</h4>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Portfolio Details Area -->
+{% endblock %}

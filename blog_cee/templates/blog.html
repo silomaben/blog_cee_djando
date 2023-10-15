@@ -1,0 +1,77 @@
+{% extends 'base_new.html' %}
+{% load static %}
+ 
+
+{% block content %}
+
+
+<div class="text-center wow fadeInUp">
+  <br> <br>
+  
+  <h2 class="title-section" id="currentPage">Blog</h2>
+  <br>
+  <!-- <div class="divider mx-auto"></div> -->
+</div>
+
+  <div class="page-section">
+    <div class="container">
+
+          <form action="#" class="form-search-blog">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <select id="categories" class="custom-select bg-light">
+                  <option >All Categories</option>
+                  {% for item in cat_menu %}
+                  <option value="{{item}}">{{item}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <input type="text" class="form-control" placeholder="Enter keyword..">
+            </div>
+          </form>
+        </div>
+        <div class="col-sm-2 text-sm-right">
+          <button class="btn btn-secondary">Filter <span class="mai-filter"></span></button>
+        </div>
+      </div>
+
+      <section class="blog section" id="blog">
+        <div class="container">
+          <div class="row">
+            {% for post in object_list %}
+                  {% if forloop.counter <= 3 %}
+            <div class="col-lg-4 col-md-6 col-12">
+              <!-- Single Blog -->
+              <div class="single-news">
+                <div class="news-head">
+                  {% if post.snippet_image %}
+                    <img src="{{post.snippet_image.url}}" alt=""> 
+                  {% endif %}
+                </div>
+                <div class="news-body">
+                  <div class="news-content">
+                    <div class="date">{{ post.post_date}}</div>
+                    <h2><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a></h2>
+                    <p class="text">{{ post.snippet }}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- End Single Blog -->
+            </div>
+              {% endif %}
+                {% endfor %}
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+
+
+{% endblock %}
+
+
+<script>
+  
+</script>

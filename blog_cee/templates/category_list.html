@@ -1,0 +1,84 @@
+{% extends 'base_new.html' %}
+{% load static %}
+ 
+
+<!-- {% block title %}Blog Categories{ post.title_tag }Category list{% endblock %} -->
+ 
+<h1>post</h1>
+{% block content %}
+    <div class="text-center wow fadeInUp">
+      <br><br>
+        <h2 class="title-section">Blog Categories</h2>
+        <!-- <div class="divider mx-auto"></div> -->
+    </div>
+
+    <div class="page-section">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6 py-3">
+              <h2 class="title-section">Blog Categories</h2>
+              <!-- <div class="divider"></div> -->
+      
+                {% for item in cat_menu %}
+                    <p><a class="dropdown-item" href="{% url 'category' item|slugify %}">{{item}}</a></p>
+                {% endfor %}
+            </div>
+            <div class="col-lg-6 py-3">
+              <div class="img-fluid py-3 text-center">
+                <img src="{% static 'base/img/about_frame.png' %}" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <!-- Blog -->
+    <div class="page-section">
+        <!-- Start Blog Area -->
+		<section class="blog section" id="blog">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="section-title">
+							<h2>Keep up with Our Most Recent Blogs.</h2>
+							<img src="{% static 'base_new/img/section-img.png' %}" alt="#">
+							<p>We explore topics at the intersection of health and business on our blog.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					{% for post in object_list %}
+        				{% if forloop.counter <= 3 %}
+					<div class="col-lg-4 col-md-6 col-12">
+						<!-- Single Blog -->
+						<div class="single-news">
+							<div class="news-head">
+								{% if post.snippet_image %}
+									<img src="{{post.snippet_image.url}}" alt=""> 
+								{% endif %}
+							</div>
+							<div class="news-body">
+								<div class="news-content">
+									<div class="date">{{ post.post_date}}</div>
+									<h2><a href="{% url 'article-detail' post.pk %}">{{post.title}}</a></h2>
+									<p class="text">{{ post.snippet }}</p>
+								</div>
+							</div>
+						</div>
+						<!-- End Single Blog -->
+					</div>
+						{% endif %}
+      				{% endfor %}
+				</div>
+			</div>
+		</section>
+
+      <div class="col-12 mt-4 text-center wow fadeInUp" style="color: white;">
+        <a href="{% url 'blog' %}" class="btn btn-primary">View More</a>
+      </div>
+    </div>
+  </div>
+</div>
+ <br><br>
+{% endblock %}

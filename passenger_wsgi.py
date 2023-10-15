@@ -1,0 +1,1 @@
+from cee.wsgi import application
